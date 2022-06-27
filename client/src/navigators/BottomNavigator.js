@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator()
 
 const BottomNavigator = () => {
     return (
-        <SafeAreaView style={[tw`h-full w-full bg-white relative`, SafeArea.AndroidSafeArea]} edges={['top']}>
+        <SafeAreaView style={[tw`h-full w-full bg-black relative`, SafeArea.AndroidSafeArea]} edges={['top']}>
             {/* <SafeAreaView style={[tw`h-full w-full bg-white relative`]} > */}
             <View style={tw`w-full h-full`}>
                 <Tab.Navigator
@@ -62,7 +62,7 @@ const BottomNavigator = () => {
                             headerShown: false,
                             tabBarShowLabel: false,
                             tabBarIcon: (({ focused }) =>
-                                <View style={tw`py-3 px-5`}>
+                                <View style={tw`px-5`}>
                                     <Ionicons
                                         name={focused ? 'search' : 'search-outline'}
                                         style={focused ? (tw`text-xl text-white`) : (tw`text-xl text-gray-600`)}
@@ -78,7 +78,7 @@ const BottomNavigator = () => {
                             headerShown: false,
                             tabBarShowLabel: false,
                             tabBarIcon: (({ focused }) =>
-                                <View style={tw`py-3 px-5`}>
+                                <View style={tw`px-5`}>
                                     <Feather
                                         name={'user'}
                                         style={focused ? (tw`text-xl text-white`) : (tw`text-xl text-gray-600`)}

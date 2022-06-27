@@ -1,8 +1,8 @@
-import { View, Text, TextInput, FlatList } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
+import { FlatGrid } from 'react-native-super-grid';
 import tw from 'twrnc'
-import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import SearchItem from '../components/Search/SearchItem';
+import MovieItem from '../Profile/MovieItem'
 
 const data = [
     {
@@ -32,25 +32,19 @@ const data = [
     }
 ]
 
-export default function SearchScreen() {
+export default function Watched() {
     return (
-        <View style={tw`flex w-full h-full bg-black px-2`}>
-            <View style={tw`flex flex-row items-center rounded-md my-3 bg-[#222]`}>
-                <Ionicons name={'search-outline'} style={tw`text-xl text-gray-500 bg-[#222] px-3`} />
-                <TextInput
-                    style={tw`flex-1 py-1.5 text-white text-lg`}
-                    placeholder="Search..."
-                    placeholderTextColor={'gray'}
-                />
-            </View>
-            <View style={tw`flex-1 w-full h-full`}>
-                <Text style={tw`text-gray-300 text-xl font-medium`}>Kết quả tìm kiếm</Text>
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <SearchItem item={item} />}
-                    vertical
-                />
-            </View>
+        <View style={tw`px-1.5 bg-black pt-3`}>
+            <FlatGrid
+                data={data}
+                itemDimension={100}
+                renderItem={({ item }) => <MovieItem item={item} />}
+                style={tw` bg-black`}
+                keyExtractor={(item, i) => i}
+                spacing={5}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+            />
         </View>
     )
 }

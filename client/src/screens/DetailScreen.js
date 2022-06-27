@@ -16,9 +16,9 @@ export default function DetailScreen({ route, navigation }) {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={tw`bg-black`}
         >
-            {/* <VirtualizedScrollView
-            style={tw`bg-black flex w-full h-full`}
-        > */}
+            {/* // <VirtualizedScrollView
+        //     style={tw`bg-black flex w-full h-full`}
+        // > */}
             <SafeAreaView>
                 <ImageBackground
                     source={{ uri: route.params.image }}
@@ -30,6 +30,7 @@ export default function DetailScreen({ route, navigation }) {
                 >
                     <TouchableOpacity
                         style={tw`z-100`}
+                        onPress={() => setTimeout(() => navigation.navigate('PlayMovieStack'), 500)}
                     >
                         <Ionicons name="play-circle-outline" size={70} style={tw`text-gray-300`} />
                     </TouchableOpacity>
@@ -59,6 +60,7 @@ export default function DetailScreen({ route, navigation }) {
                 </ImageBackground>
                 <View style={tw`flex px-2 w-full h-full`}>
                     <TouchableOpacity
+                        onPress={() => setTimeout(() => navigation.navigate('PlayMovieStack'), 500)}
                         style={tw`flex flex-row items-center justify-center bg-white py-3 mt-3 rounded`}
                     >
                         <Ionicons name="ios-play" size={24} color="black" />

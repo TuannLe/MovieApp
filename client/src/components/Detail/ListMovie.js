@@ -9,6 +9,7 @@ export default function ListMovie() {
             showsVerticalScrollIndicator={false}
             style={tw`flex-1 w-full h-full bg-black`}
         >
+
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>

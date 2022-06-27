@@ -1,11 +1,19 @@
 import { View, Text, ImageBackground, Dimensions, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+import CategoriesModal from '../Modal/CategoriesModal';
+import { useNavigation } from '@react-navigation/native'
 
 export default function index() {
     const { width: SCREEN_WIDTH } = Dimensions.get("window");
+    const navigation = useNavigation()
+    const [isVisibleModal, setVisibleModal] = useState(false)
+    const handleVisibleModal = () => {
+        setVisibleModal(!isVisibleModal)
+    }
+
     return (
         <View style={tw`bg-pink-200`}>
             <ImageBackground
@@ -16,6 +24,18 @@ export default function index() {
                 ]}
                 resizeMode="cover"
             />
+            <LinearGradient
+                colors={["rgba(0, 0, 0, 0.7)", "rgba(0, 0, 0, 0.00005)"]}
+                style={tw`w-full h-40 justify-end absolute top-0 right-0 left-0`}
+            >
+                <TouchableOpacity
+                    style={tw`absolute flex flex-row items-center top-3 right-3`}
+                    onPress={handleVisibleModal}
+                >
+                    <Text style={tw`text-white text-lg mr-2`}>Categories</Text>
+                    <AntDesign name="caretdown" size={16} color="white" />
+                </TouchableOpacity>
+            </LinearGradient>
             <LinearGradient
                 colors={["rgba(0, 0, 0, 0.00005)", "rgba(0, 0, 0, 1)"]}
                 style={tw`w-full h-80 justify-end absolute bottom-0 right-0 left-0`}
@@ -28,11 +48,12 @@ export default function index() {
                     <TouchableOpacity
                         style={tw`flex items-center`}
                     >
-                        <AntDesign name="plus" size={24} color="white" />
-                        <Text style={tw`text-white text-base`}>Danh sách</Text>
+                        <Feather name="bookmark" size={24} color="white" />
+                        <Text style={tw`text-white text-base`}>Xem sau</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={tw`flex flex-row items-center px-3 rounded bg-white my-2`}
+                        onPress={() => setTimeout(() => navigation.navigate('PlayMovieStack'), 500)}
                     >
                         <Ionicons name="play" size={24} color="black" />
                         <Text style={tw`text-black text-base ml-2 font-medium`}>Phát</Text>
@@ -45,6 +66,10 @@ export default function index() {
                     </TouchableOpacity>
                 </View>
             </LinearGradient>
+            <CategoriesModal
+                handleVisible={handleVisibleModal}
+                isVisible={isVisibleModal}
+            />
         </View>
     )
 }
