@@ -34,7 +34,7 @@ const data = [
 
 export default function ListMovie() {
     return (
-        <View style={tw`mt-3 px-1.5`}>
+        <View style={tw`mt-4 px-1.5`}>
             <Text style={tw`text-xl font-medium text-white`}>Trending</Text>
             <FlatList
                 data={data}

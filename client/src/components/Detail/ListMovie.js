@@ -4,12 +4,7 @@ import tw from 'twrnc'
 
 export default function ListMovie() {
     return (
-        <ScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            style={tw`flex-1 w-full h-full bg-black`}
-        >
-
+        <View style={tw`w-full h-full`}>
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>
@@ -18,37 +13,6 @@ export default function ListMovie() {
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>
             <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-            <Text style={tw`text-white`}>ListMovie</Text>
-        </ScrollView>
+        </View>
     )
 }

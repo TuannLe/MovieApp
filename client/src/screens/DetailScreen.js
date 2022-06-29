@@ -1,14 +1,17 @@
 import { View, Text, SafeAreaView, ImageBackground, Dimensions, FlatList, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
-import { TopNavigator } from '../navigators/TopNavigator'
-import VirtualizedScrollView from '../components/VitualizedScrollView'
+import ListMovie from '../components/Detail/ListMovie'
+import SimilarMovies from '../components/Detail/SimilarMovies'
+import Comments from '../components/Detail/Comments'
 
 export default function DetailScreen({ route, navigation }) {
-    const { height: SCREEN_HEIGHT } = Dimensions.get('window')
     const { width: SCREEN_WIDTH } = Dimensions.get('window')
+    const [isActiveSimilar, setIsActiveSimilar] = useState(false)
+    const [isActiveComments, setIsActiveComments] = useState(false)
+    const [isActiveEpisode, setIsActiveEpisode] = useState(true)
 
     return (
         <ScrollView
@@ -16,9 +19,6 @@ export default function DetailScreen({ route, navigation }) {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={tw`bg-black`}
         >
-            {/* // <VirtualizedScrollView
-        //     style={tw`bg-black flex w-full h-full`}
-        // > */}
             <SafeAreaView>
                 <ImageBackground
                     source={{ uri: route.params.image }}
@@ -47,7 +47,7 @@ export default function DetailScreen({ route, navigation }) {
                         <Text style={tw`text-white text-3xl font-medium`}>{route.params.name}</Text>
                         <View style={tw`flex flex-row items-center py-1`}>
                             <Text style={tw`text-gray-400 text-base`}>2h28m</Text>
-                            <Text style={tw`px-2 ml-2 font-medium bg-yellow-400 rounded-sm`}>HD</Text>
+                            <Text style={tw`px-2 ml-2 font-medium bg-yellow-400 rounded overflow-hidden`}>HD</Text>
                         </View>
                         <View style={tw`pb-3`}>
                             <FlatList
@@ -99,17 +99,58 @@ export default function DetailScreen({ route, navigation }) {
                             Diễn viên: Lee Seung Gi, Suzy, Shin Sung Rok, Kim Min
                         </Text>
                     </View>
-                    <View
-                        style={[
-                            { height: SCREEN_HEIGHT },
-                            tw`flex`
-                        ]}
-                    >
-                        <TopNavigator />
+                    <View style={tw`mt-4`}>
+                        <View style={tw`flex flex-row justify-around`}>
+                            <TouchableOpacity
+                                style={isActiveEpisode ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
+                                onPress={() => {
+                                    setIsActiveEpisode(true)
+                                    setIsActiveSimilar(false)
+                                    setIsActiveComments(false)
+                                }}
+                            >
+                                <Text style={tw`text-white text-center text-lg font-medium`}>Các tập</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={isActiveSimilar ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
+                                onPress={() => {
+                                    setIsActiveEpisode(false);
+                                    setIsActiveSimilar(true);
+                                    setIsActiveComments(false)
+                                }}
+                            >
+                                <Text style={tw`text-white text-center text-lg font-medium`}>Tương tự</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={isActiveComments ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
+                                onPress={() => {
+                                    setIsActiveEpisode(false)
+                                    setIsActiveSimilar(false)
+                                    setIsActiveComments(true)
+                                }}
+                            >
+                                <Text style={tw`text-white text-center text-lg font-medium`}>Bình luận</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={tw`mt-3`}>
+                            {isActiveEpisode ? (
+                                <ListMovie />
+                            ) : (
+                                isActiveSimilar ? (
+                                    <SimilarMovies />
+                                ) : (
+                                    isActiveComments ? (
+                                        <Comments />
+                                    ) : (
+                                        <Text></Text>
+                                    )
+                                )
+                            )
+                            }
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
-            {/* </VirtualizedScrollView> */}
         </ScrollView >
     )
 }

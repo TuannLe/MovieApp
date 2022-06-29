@@ -4,7 +4,7 @@ import tw from 'twrnc'
 
 export default function SimilarMovies() {
     return (
-        <View style={tw`flex-1 w-full h-full bg-black`}>
+        <View style={tw`w-full h-full`}>
             <Text style={tw`text-white`}>SimilarMovies</Text>
             <Text style={tw`text-white`}>SimilarMovies</Text>
             <Text style={tw`text-white`}>SimilarMovies</Text>

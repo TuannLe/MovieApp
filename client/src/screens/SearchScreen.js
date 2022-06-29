@@ -34,11 +34,11 @@ const data = [
 
 export default function SearchScreen() {
     return (
-        <View style={tw`flex w-full h-full bg-black px-2`}>
+        <View style={tw`flex w-full h-full bg-black px-1.5`}>
             <View style={tw`flex flex-row items-center rounded-md my-3 bg-[#222]`}>
                 <Ionicons name={'search-outline'} style={tw`text-xl text-gray-500 bg-[#222] px-3`} />
                 <TextInput
-                    style={tw`flex-1 py-1.5 text-white text-lg`}
+                    style={tw`flex-1 py-1.5 text-white text-base`}
                     placeholder="Search..."
                     placeholderTextColor={'gray'}
                 />

@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity, Dimensions, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native';
 
 export default function MovieItem({ item }) {
-    const { width: SCREEN_WIDTH } = Dimensions.get('window')
     const navigation = useNavigation()
 
     return (
@@ -15,6 +14,7 @@ export default function MovieItem({ item }) {
                     category: item.category,
                     image: item.image,
                 })}
+                style={tw`overflow-hidden rounded`}
             >
                 <ImageBackground
                     source={{ uri: item.image }}

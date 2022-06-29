@@ -20,7 +20,7 @@ export default function ItemMovie({ item }) {
                 resizeMode="cover"
                 style={[
                     { width: SCREEN_WIDTH / 2.4, height: SCREEN_WIDTH * 0.6 },
-                    tw`rounded-sm overflow-hidden justify-end mr-2`
+                    tw`rounded overflow-hidden justify-end mr-2`
                 ]}
             />
         </TouchableOpacity>
