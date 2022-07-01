@@ -3,15 +3,13 @@ import React, { useState } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
-import ListMovie from '../components/Detail/ListMovie'
 import SimilarMovies from '../components/Detail/SimilarMovies'
 import Comments from '../components/Detail/Comments'
 
 export default function DetailScreen({ route, navigation }) {
     const { width: SCREEN_WIDTH } = Dimensions.get('window')
-    const [isActiveSimilar, setIsActiveSimilar] = useState(false)
+    const [isActiveSimilar, setIsActiveSimilar] = useState(true)
     const [isActiveComments, setIsActiveComments] = useState(false)
-    const [isActiveEpisode, setIsActiveEpisode] = useState(true)
 
     return (
         <ScrollView
@@ -102,19 +100,8 @@ export default function DetailScreen({ route, navigation }) {
                     <View style={tw`mt-4`}>
                         <View style={tw`flex flex-row justify-around`}>
                             <TouchableOpacity
-                                style={isActiveEpisode ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
+                                style={isActiveSimilar ? (tw`py-3 border-t-2 border-red-500 flex-1`) : (tw`py-3 flex-1`)}
                                 onPress={() => {
-                                    setIsActiveEpisode(true)
-                                    setIsActiveSimilar(false)
-                                    setIsActiveComments(false)
-                                }}
-                            >
-                                <Text style={tw`text-white text-center text-lg font-medium`}>Các tập</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={isActiveSimilar ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
-                                onPress={() => {
-                                    setIsActiveEpisode(false);
                                     setIsActiveSimilar(true);
                                     setIsActiveComments(false)
                                 }}
@@ -122,31 +109,25 @@ export default function DetailScreen({ route, navigation }) {
                                 <Text style={tw`text-white text-center text-lg font-medium`}>Tương tự</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                style={isActiveComments ? (tw`py-3 border-t-4 border-red-500 flex-1`) : (tw`py-3 border-t-4 flex-1`)}
+                                style={isActiveComments ? (tw`py-3 border-t-2 border-red-500 flex-1`) : (tw`py-3 flex-1`)}
                                 onPress={() => {
-                                    setIsActiveEpisode(false)
-                                    setIsActiveSimilar(false)
                                     setIsActiveComments(true)
+                                    setIsActiveSimilar(false)
                                 }}
                             >
                                 <Text style={tw`text-white text-center text-lg font-medium`}>Bình luận</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={tw`mt-3`}>
-                            {isActiveEpisode ? (
-                                <ListMovie />
+                            {isActiveSimilar ? (
+                                <SimilarMovies />
                             ) : (
-                                isActiveSimilar ? (
-                                    <SimilarMovies />
+                                isActiveComments ? (
+                                    <Comments />
                                 ) : (
-                                    isActiveComments ? (
-                                        <Comments />
-                                    ) : (
-                                        <Text></Text>
-                                    )
+                                    <Text></Text>
                                 )
-                            )
-                            }
+                            )}
                         </View>
                     </View>
                 </View>
