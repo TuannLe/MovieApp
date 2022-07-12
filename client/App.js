@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigators/StackNavigator'
+import store from './src/redux/store'
+import { Provider } from 'react-redux'
 
 export default function App() {
   return (
@@ -12,7 +14,9 @@ export default function App() {
       // hidden={true}
       />
       <NavigationContainer>
-        <StackNavigator />
+        <Provider store={store}>
+          <StackNavigator />
+        </Provider>
       </NavigationContainer>
     </SafeAreaProvider>
   );
