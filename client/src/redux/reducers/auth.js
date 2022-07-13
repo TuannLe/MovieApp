@@ -40,5 +40,7 @@ export default function authReducers(state = INIT_STATE.auth, action) {
                 isLoading: false,
                 error: true
             }
+        default:
+            return state
     }
 }

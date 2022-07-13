@@ -20,6 +20,7 @@ function* signUpSaga(action) {
         console.log('Sign Up running...')
         const res = yield call(apis.signUp, action.payload)
         if (res) {
+            console.log('Sign Up Success')
             yield put(actions.SignUpSuccess())
         }
     } catch (error) {

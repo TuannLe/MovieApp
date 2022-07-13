@@ -3,11 +3,54 @@ import React, { useState, useRef } from 'react'
 import tw from 'twrnc'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions/auth'
 
 export default function Auth() {
     const refRBSheet = useRef()
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    // login
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    // register
+    const [crEmail, setCrEmail] = useState('')
+    const [crPassword, setCrPassword] = useState('')
+    const [cfPassword, setCfPassword] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+
+    const [signInWarn, setSignInWarn] = useState('')
+
+    const handleSignIn = () => {
+        if (!email) {
+            setSignInWarn('Please enter your email')
+        } else if (!password) {
+            setSignInWarn('Please enter your password')
+        } else {
+            dispatch(actions.SignInStart({ email, password }))
+        }
+    }
+
+    const handleSignUp = () => {
+        if (!firstName || !lastName) {
+            setSignInWarn('Please enter your name')
+        } else if (!crEmail) {
+            setSignInWarn('Please enter your email')
+        } else if (!phoneNumber) {
+            setSignInWarn('Please enter your phone number')
+        } else if (!crPassword || !cfPassword) {
+            setSignInWarn('Please enter password')
+        } else if (crPassword != cfPassword) {
+            setSignInWarn(`Confirm password doesn't match`)
+        } else {
+            setSignInWarn('')
+            dispatch(actions.SignUpStart({ firstName, lastName, crEmail, phoneNumber, crPassword }))
+        }
+    }
 
     return (
         <ImageBackground
@@ -22,15 +65,24 @@ export default function Auth() {
                         placeholder='Enter your email'
                         placeholderTextColor={'gray'}
                         style={tw`p-2 bg-[#222] text-white text-base rounded-lg mb-2`}
+                        onChangeText={val => setEmail(val)}
                     />
                     <TextInput
                         placeholder='Password'
                         placeholderTextColor={'gray'}
                         style={tw`p-2 bg-[#222] text-white text-base rounded-lg`}
+                        onChangeText={val => setPassword(val)}
                     />
+                    {
+                        signInWarn ? (
+                            <View style={tw`justify-center mt-2`}>
+                                <Text style={tw`text-pink-500`}>{signInWarn}</Text>
+                            </View>
+                        ) : <></>
+                    }
                     <TouchableOpacity
                         style={tw`py-2 bg-red-500 rounded-lg mt-5`}
-                        onPress={() => navigation.navigate('HomeStack')}
+                        onPress={handleSignIn}
                     >
                         <Text style={tw`text-white text-lg font-medium text-center`}>Sign In</Text>
                     </TouchableOpacity>
@@ -60,32 +112,39 @@ export default function Auth() {
                         <TextInput
                             style={tw`flex-1 p-2 rounded-lg bg-[#F3F0F6] `}
                             placeholder='First name...'
+                            onChangeText={val => setFirstName(val)}
                         />
                         <TextInput
                             style={tw`flex-1 p-2 rounded-lg bg-[#F3F0F6] ml-2`}
                             placeholder='Last name...'
+                            onChangeText={val => setLastName(val)}
                         />
                     </View >
                     <TextInput
                         style={tw`p-2 rounded-lg bg-[#F3F0F6] my-2`}
                         placeholder='Phone number...'
+                        onChangeText={val => setPhoneNumber(val)}
                     />
                     <TextInput
                         style={tw`p-2 rounded-lg bg-[#F3F0F6]`}
                         placeholder='Email...'
+                        onChangeText={val => setCrEmail(val)}
                     />
                     <TextInput
                         style={tw`p-2 rounded-lg bg-[#F3F0F6] my-2`}
                         placeholder='Password...'
                         secureTextEntry={true}
+                        onChangeText={val => setCrPassword(val)}
                     />
                     <TextInput
                         style={tw`p-2 rounded-lg bg-[#F3F0F6]`}
                         placeholder='Confirm password...'
                         secureTextEntry={true}
+                        onChangeText={val => setCfPassword(val)}
                     />
                     <TouchableOpacity
                         style={tw`py-2 bg-red-500 rounded-lg mt-5`}
+                        onPress={handleSignUp}
                     >
                         <Text style={tw`text-white text-lg font-medium text-center`}>Sign Up</Text>
                     </TouchableOpacity>

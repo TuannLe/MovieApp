@@ -2,7 +2,7 @@ import AXIOS from './index'
 
 export const signIn = async (payload) => {
     try {
-        const res = await AXIOS.post('/auth/signIn', payload)
+        const res = await AXIOS.post('/auth/login', payload)
         return res
     } catch (error) {
         return error
@@ -10,8 +10,9 @@ export const signIn = async (payload) => {
 }
 
 export const signUp = async (payload) => {
+    console.log(payload)
     try {
-        const res = await AXIOS.post('/auth/signUp', {
+        const res = await AXIOS.post('/auth/register', {
             firstName: payload.firstName,
             lastName: payload.lastName,
             phoneNumber: payload.phoneNumber,
