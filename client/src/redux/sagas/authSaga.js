@@ -8,6 +8,7 @@ function* fetchLoginSaga(action) {
         console.log('Fetching login running...')
         const res = yield call(apis.signIn, action.payload)
         if (res.status === 200) {
+            console.log("Login success")
             yield put(actions.SignInSuccess(res.data))
         }
     } catch (error) {
@@ -19,9 +20,9 @@ function* signUpSaga(action) {
     try {
         console.log('Sign Up running...')
         const res = yield call(apis.signUp, action.payload)
-        if (res) {
+        if (res.status === 200) {
             console.log('Sign Up Success')
-            yield put(actions.SignUpSuccess())
+            yield put(actions.SignUpSuccess(res.data))
         }
     } catch (error) {
         yield put(actions.SignUpFailure(error))

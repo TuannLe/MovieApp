@@ -10,9 +10,8 @@ export const signIn = async (payload) => {
 }
 
 export const signUp = async (payload) => {
-    console.log(payload)
     try {
-        const res = await AXIOS.post('/auth/register', {
+        const res = await AXIOS.post(`/auth/register`, {
             firstName: payload.firstName,
             lastName: payload.lastName,
             phoneNumber: payload.phoneNumber,

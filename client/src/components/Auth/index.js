@@ -70,6 +70,7 @@ export default function Auth() {
                     <TextInput
                         placeholder='Password'
                         placeholderTextColor={'gray'}
+                        secureTextEntry={true}
                         style={tw`p-2 bg-[#222] text-white text-base rounded-lg`}
                         onChangeText={val => setPassword(val)}
                     />
