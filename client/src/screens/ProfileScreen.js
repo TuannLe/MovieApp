@@ -3,10 +3,12 @@ import React, { useRef } from 'react'
 import tw from 'twrnc'
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet'
+import { useSelector } from 'react-redux'
 import { TopNavigatorProfile } from '../navigators/TopNavigator'
 
 export default function ProfileScreen() {
     const refRBSheet = useRef()
+    const currentUser = useSelector((state) => state.auth.currentUser)
 
     return (
         <SafeAreaView style={tw`w-full h-full bg-black`}>
@@ -26,8 +28,8 @@ export default function ProfileScreen() {
                         style={tw`w-25 h-25 rounded-full m-1`}
                     />
                 </View>
-                <Text style={tw`text-gray-200 text-lg`}>Username</Text>
-                <Text style={tw`text-gray-200 text-base`}>Email</Text>
+                <Text style={tw`text-gray-200 text-lg`}>{currentUser.firstName + ' ' + currentUser.lastName}</Text>
+                <Text style={tw`text-gray-200 text-base`}>{currentUser.email}</Text>
             </View>
             <View style={tw`flex-1 w-full h-full`}>
                 <TopNavigatorProfile />

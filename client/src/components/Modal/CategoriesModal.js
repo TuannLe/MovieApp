@@ -1,42 +1,11 @@
 import { View, Text, Modal, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
-import { BlurView } from 'expo-blur'
+import { useSelector } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons';
 
-const data = [
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-    "Hai kich",
-]
-
 export default function CategoriesModal({ handleVisible, isVisible }) {
+    const data = useSelector((state) => state.category.data)
     return (
         <Modal
             visible={isVisible}
