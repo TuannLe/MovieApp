@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Home from '../components/Home'
 import ListMovie from '../components/FeaturedMovies/ListMovie'
 import * as categoryActions from '../redux/actions/category'
+import { getMovieStart } from '../redux/actions/movie'
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
@@ -12,7 +13,9 @@ const HomeScreen = () => {
 
     useEffect(() => {
         dispatch(categoryActions.getCategoriesStart({ token }))
-    })
+        dispatch(getMovieStart({ token }))
+    }, [])
+    const dataMovies = useSelector((state) => state.movie.movies)
 
     return (
         <ScrollView
@@ -21,8 +24,8 @@ const HomeScreen = () => {
             contentContainerStyle={tw`bg-black`}
         >
             <Home />
-            <ListMovie />
-            <ListMovie />
+            <ListMovie data={dataMovies} />
+            <ListMovie data={dataMovies} />
         </ScrollView>
     )
 }

@@ -10,13 +10,11 @@ export default function ItemMovie({ item }) {
     return (
         <TouchableOpacity
             onPress={() => navigation.navigate('DetailStack', {
-                name: item.name,
-                category: item.category,
-                image: item.image,
+                item: item
             })}
         >
             <ImageBackground
-                source={{ uri: item.image }}
+                source={{ uri: `data:image/png;base64,${item.poster}` }}
                 resizeMode="cover"
                 style={[
                     { width: SCREEN_WIDTH / 2.4, height: SCREEN_WIDTH * 0.6 },

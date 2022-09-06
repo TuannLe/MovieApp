@@ -19,7 +19,7 @@ export default function DetailScreen({ route, navigation }) {
         >
             <SafeAreaView>
                 <ImageBackground
-                    source={{ uri: route.params.image }}
+                    source={{ uri: `data:image/png;base64,${route.params.item.poster}` }}
                     style={[
                         { width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.4 },
                         tw`items-center justify-center relative`
@@ -42,17 +42,13 @@ export default function DetailScreen({ route, navigation }) {
                         colors={["rgba(0, 0, 0, 0.00005)", "rgba(0, 0, 0, 1)"]}
                         style={tw`w-full h-70 justify-end absolute px-2 bottom-0 right-0 left-0`}
                     >
-                        <Text style={tw`text-white text-3xl font-medium`}>{route.params.name}</Text>
+                        <Text style={tw`text-white text-3xl font-medium`}>{route.params.item.movieName}</Text>
                         <View style={tw`flex flex-row items-center py-1`}>
                             <Text style={tw`text-gray-400 text-base`}>2h28m</Text>
                             <Text style={tw`px-2 ml-2 font-medium bg-yellow-400 rounded overflow-hidden`}>HD</Text>
                         </View>
                         <View style={tw`pb-3`}>
-                            <FlatList
-                                data={route.params.category}
-                                renderItem={({ item }) => <Text style={tw`text-gray-400 text-base`}>{item + '  '}</Text>}
-                                horizontal
-                            />
+                            <Text style={tw`text-gray-400 text-base`}>{route.params.item.category[0].categoryName}</Text>
                         </View>
                     </LinearGradient>
                 </ImageBackground>
@@ -88,13 +84,13 @@ export default function DetailScreen({ route, navigation }) {
                     </View>
                     <View>
                         <Text style={tw`text-white text-lg`}>
-                            Lãng Khách - Vagabond là bộ phim hành động kể về hai nhân vật vô tình biết được được những “bí mật đen” của quốc gia. Trong phim, Suzy sẽ vào vai nữ chính Go Hae Ri, một nhân viên tình báo thuộc Cơ quan Tình báo quốc gia.
+                            {route.params.item.description}
                         </Text>
                         <Text style={tw`text-gray-400 text-base my-2`}>
-                            Đạo diễn: Yoo In Shik
+                            Đạo diễn: {route.params.item.directors.join(',')}
                         </Text>
                         <Text style={tw`text-gray-400 text-base`}>
-                            Diễn viên: Lee Seung Gi, Suzy, Shin Sung Rok, Kim Min
+                            Diễn viên: {route.params.item.casts.join(',')}
                         </Text>
                     </View>
                     <View style={tw`mt-4`}>

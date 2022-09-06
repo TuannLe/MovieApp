@@ -15,7 +15,7 @@ export default function ItemMovie({ item }) {
                     style={tw`flex flex-1 flex-row items-center`}
                 >
                     <ImageBackground
-                        source={{ uri: item.image }}
+                        source={{ uri: `data:image/png;base64,${item.poster}` }}
                         resizeMode="cover"
                         style={[
                             { width: SCREEN_WIDTH / 2.7, height: SCREEN_WIDTH / 3.7 },
@@ -27,7 +27,7 @@ export default function ItemMovie({ item }) {
                         </View>
                     </ImageBackground>
                     <View style={tw`flex ml-3`}>
-                        <Text style={tw`text-white text-base`}>{item.name}</Text>
+                        <Text style={tw`text-white text-base`}>{item.movieName}</Text>
                         <Text style={tw`text-gray-400`}>35p</Text>
                     </View>
                 </TouchableOpacity>
@@ -41,7 +41,9 @@ export default function ItemMovie({ item }) {
                 <Text
                     style={tw`text-gray-400`}
                     numberOfLines={3}
-                >Lãng Khách - Vagabond là bộ phim hành động kể về hai nhân vật vô tình biết được được những “bí mật đen” của quốc gia. Trong phim, Suzy sẽ vào vai nữ chính Go Hae Ri, một nhân viên tình báo thuộc Cơ quan Tình báo quốc gia.</Text>
+                >
+                    {item.description}
+                </Text>
             </View>
         </View>
     )

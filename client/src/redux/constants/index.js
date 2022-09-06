@@ -9,5 +9,14 @@ export const INIT_STATE = {
         isLoading: false,
         data: [],
         error: false
+    },
+    movie: {
+        movies: [],
+        moviesByCategory: [],
+        moviesSearch: [],
+        linksMovie: [],
+        message: '',
+        isLoading: false,
+        error: false
     }
 }
