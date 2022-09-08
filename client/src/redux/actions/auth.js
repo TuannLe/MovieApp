@@ -43,3 +43,45 @@ export const SignUpFailure = (error) => {
         error
     }
 }
+
+export const FavoriteStart = (payload) => {
+    return {
+        type: TYPES.FAVORITE_MOVIE_START,
+        payload
+    }
+}
+
+export const FavoriteSuccess = (payload) => {
+    return {
+        type: TYPES.FAVORITE_MOVIE_SUCCESS,
+        payload
+    }
+}
+
+export const FavoriteFailure = (error) => {
+    return {
+        type: TYPES.FAVORITE_MOVIE_FAILURE,
+        error
+    }
+}
+
+export const WatchingStart = (payload) => {
+    return {
+        type: TYPES.WATCHING_START,
+        payload
+    }
+}
+
+export const WatchingSuccess = (payload) => {
+    return {
+        type: TYPES.WATCHING_SUCCESS,
+        payload
+    }
+}
+
+export const WatchingFailure = (error) => {
+    return {
+        type: TYPES.WATCHING_FAILURE,
+        error
+    }
+}

@@ -9,11 +9,11 @@ function* getCategoriesSaga(action) {
         const res = yield call(apis.getCategories, action.payload)
         if (res.status === 200) {
             console.log('Get categories done...')
-            const newData = []
-            res.data.map((item, i) => {
-                newData.push(item.categoryName)
-            })
-            yield put(actions.getCategoriesSuccess(newData))
+            // const newData = []
+            // res.data.map((item, i) => {
+            //     newData.push(item.categoryName)
+            // })
+            yield put(actions.getCategoriesSuccess(res.data))
         }
     } catch (error) {
         yield put(actions.getCategoriesFailure(error))

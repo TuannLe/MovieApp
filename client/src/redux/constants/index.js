@@ -1,6 +1,8 @@
 export const INIT_STATE = {
     auth: {
         currentUser: {},
+        favorites: [],
+        watching: [],
         isLoading: false,
         message: '',
         error: false

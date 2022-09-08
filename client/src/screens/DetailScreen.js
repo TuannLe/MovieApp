@@ -3,13 +3,23 @@ import React, { useState } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { FavoriteStart } from '../redux/actions/auth'
 import SimilarMovies from '../components/Detail/SimilarMovies'
 import Comments from '../components/Detail/Comments'
 
 export default function DetailScreen({ route, navigation }) {
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+
     const { width: SCREEN_WIDTH } = Dimensions.get('window')
     const [isActiveSimilar, setIsActiveSimilar] = useState(true)
     const [isActiveComments, setIsActiveComments] = useState(false)
+    const movieId = route.params.item._id
+
+    const handleFavorite = () => {
+        dispatch(FavoriteStart({ token, movieId }))
+    }
 
     return (
         <ScrollView
@@ -63,6 +73,7 @@ export default function DetailScreen({ route, navigation }) {
                     <View style={tw`flex flex-row justify-around my-5`}>
                         <TouchableOpacity
                             style={tw`p-3 rounded-full bg-gray-800`}
+                            onPress={handleFavorite}
                         >
                             <Feather name="bookmark" size={24} color="white" />
                         </TouchableOpacity>

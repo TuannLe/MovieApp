@@ -6,7 +6,7 @@ import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
 import CategoriesModal from '../Modal/CategoriesModal';
 import { useNavigation } from '@react-navigation/native'
 
-export default function index() {
+export default function index({ item }) {
     const { width: SCREEN_WIDTH } = Dimensions.get("window");
     const navigation = useNavigation()
     const [isVisibleModal, setVisibleModal] = useState(false)
@@ -17,7 +17,7 @@ export default function index() {
     return (
         <View style={tw`bg-pink-200`}>
             <ImageBackground
-                source={{ uri: 'http://static.ssphim.net/static/5fe2d564b3fa6403ffa11d1c/624319fd37081a49d141b7d4_banner-nhat-ky-tu-do-cua-toi.jpeg' }}
+                source={{ uri: `data:image/png;base64,${item?.poster}` }}
                 style={[
                     { width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.4 },
                     tw`justify-end relative`
@@ -41,8 +41,8 @@ export default function index() {
                 style={tw`w-full h-80 justify-end absolute bottom-0 right-0 left-0`}
             >
                 <View style={tw`flex items-center pb-3 mx-7`}>
-                    <Text style={tw`text-white text-4xl font-medium text-center`}>Nhật ký tự do của tôi</Text>
-                    <Text style={tw`text-white text-xl pt-3`}>Tâm lý - Tình cảm</Text>
+                    <Text style={tw`text-white text-4xl font-medium text-center`}>{item?.movieName}</Text>
+                    <Text style={tw`text-white text-xl pt-3`}>{item?.category[0].categoryName}</Text>
                 </View>
                 <View style={tw`flex flex-row justify-around pb-3`}>
                     <TouchableOpacity
@@ -60,6 +60,9 @@ export default function index() {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={tw`flex items-center`}
+                        onPress={() => navigation.navigate('DetailStack', {
+                            item: item
+                        })}
                     >
                         <Ionicons name="ios-information-circle-outline" size={24} color="white" />
                         <Text style={tw`text-white text-base`}>Thông tin</Text>

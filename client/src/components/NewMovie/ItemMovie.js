@@ -18,7 +18,7 @@ export default function ItemMovie({ item }) {
     return (
         <View style={tw`mt-2`}>
             <ImageBackground
-                source={{ uri: item.image }}
+                source={{ uri: `data:image/png;base64,${item.poster}` }}
                 resizeMode="cover"
                 style={[
                     { width: SCREEN_WIDTH, height: SCREEN_WIDTH / 1.9 },
@@ -29,9 +29,7 @@ export default function ItemMovie({ item }) {
                 <TouchableOpacity
                     style={tw`flex flex-row items-center bg-white px-4 rounded`}
                     onPress={() => navigation.navigate('DetailStack', {
-                        name: item.name,
-                        category: item.category,
-                        image: item.image,
+                        item: item
                     })}
                 >
                     <Ionicons name="ios-play" size={24} color="black" />
@@ -56,13 +54,13 @@ export default function ItemMovie({ item }) {
                 </View>
             </View>
             <View style={tw`my-3`}>
-                <Text style={tw`text-white text-2xl font-medium`}>{item.name}</Text>
+                <Text style={tw`text-white text-2xl font-medium`}>{item.movieName}</Text>
                 <Text
                     style={tw`text-gray-400 text-lg`}
                     numberOfLines={showMore ? 99 : 2}
                     onTextLayout={onTextLayout}
                 >
-                    Lãng Khách - Vagabond là bộ phim hành động kể về hai nhân vật vô tình biết được được những “bí mật đen” của quốc gia. Trong phim, Suzy sẽ vào vai nữ chính Go Hae Ri, một nhân viên tình báo thuộc Cơ quan Tình báo quốc gia.
+                    {item.description}
                 </Text>
                 {
                     lengthMore ?
@@ -73,11 +71,6 @@ export default function ItemMovie({ item }) {
                         </TouchableOpacity>
                         : null
                 }
-                {/* <FlatList
-                    data={item.category}
-                    renderItem={({ item }) => <Text style={tw`text-white text-base`}>{item + '  '}</Text>}
-                    horizontal
-                /> */}
             </View>
         </View>
 

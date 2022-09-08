@@ -29,7 +29,35 @@ function* signUpSaga(action) {
     }
 }
 
+function* favoritesSaga(action) {
+    try {
+        console.log('Add favorites movie running...')
+        const res = yield call(apis.favorites, action.payload)
+        if (res.status === 200) {
+            console.log('Add favorites movie successfully')
+            yield put(actions.FavoriteSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.FavoriteFailure(error))
+    }
+}
+
+function* watchingSaga(action) {
+    try {
+        console.log('Add watching movie running...')
+        const res = yield call(apis.watching, action.payload)
+        if (res.status === 200) {
+            console.log('Add watching movie successfully')
+            yield put(actions.WatchingSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.WatchingFailure(error))
+    }
+}
+
 export default authSaga = [
     takeLatest(TYPES.SIGN_IN_START, fetchLoginSaga),
-    takeLatest(TYPES.SIGN_UP_START, signUpSaga)
+    takeLatest(TYPES.SIGN_UP_START, signUpSaga),
+    takeLatest(TYPES.FAVORITE_MOVIE_START, favoritesSaga),
+    takeLatest(TYPES.WATCHING_START, watchingSaga),
 ]

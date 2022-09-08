@@ -17,7 +17,7 @@ export default function movieReducer(state = INIT_STATE.movie, action) {
                 message: 'Add movie successfully',
                 error: false
             }
-        case TYPES.GET_MOVIES_FAILURE:
+        case TYPES.GET_MOVIE_FAILURE:
             return {
                 ...state,
                 isLoading: false,
@@ -72,7 +72,7 @@ export default function movieReducer(state = INIT_STATE.movie, action) {
             return {
                 ...state,
                 isLoading: false,
-                searchMovies: action.payload,
+                moviesSearch: action.payload,
                 error: false
             }
         case TYPES.SEARCH_MOVIES_FAILURE:

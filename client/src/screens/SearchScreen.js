@@ -1,19 +1,23 @@
 import { View, Text, TextInput, FlatList } from 'react-native'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import tw from 'twrnc'
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import SearchItem from '../components/Search/SearchItem';
 import { searchMovieStart } from '../redux/actions/movie'
 
-const data = false
-
 export default function SearchScreen() {
     const dispatch = useDispatch()
     const token = useSelector((state) => state.auth.currentUser.accessToken)
-    const handleSearch = () => {
-        dispatch(searchMovieStart({ token, movieName }))
-    }
+    const data = useSelector((state) => state.movie.moviesSearch)
+    const [input, setInput] = useState('')
+
+    useEffect(() => {
+        if (input) {
+            dispatch(searchMovieStart({ token, movieName: input }))
+        }
+    }, [input])
+
 
     return (
         <View style={tw`flex w-full h-full bg-black px-1.5`}>
@@ -23,6 +27,8 @@ export default function SearchScreen() {
                     style={tw`flex-1 py-1.5 text-white text-base`}
                     placeholder="Search..."
                     placeholderTextColor={'gray'}
+                    value={input}
+                    onChangeText={val => setInput(val)}
                 />
             </View>
             <View style={tw`flex-1 w-full h-full`}>

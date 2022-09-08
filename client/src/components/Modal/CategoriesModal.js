@@ -1,36 +1,44 @@
 import { View, Text, Modal, TouchableOpacity, FlatList } from 'react-native'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import tw from 'twrnc'
-import { useSelector } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { getMovieByCategoryStart } from '../../redux/actions/movie'
 
 export default function CategoriesModal({ handleVisible, isVisible }) {
     const data = useSelector((state) => state.category.data)
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+    const dispatch = useDispatch()
+    const [categoryId, setCategoryId] = useState('')
+
+    useEffect(() => {
+        data.push({
+            _id: 1,
+            categoryName: 'Tất cả'
+        })
+    }, [])
+    useEffect(() => {
+        dispatch(getMovieByCategoryStart({ token, categoryId }))
+    }, [categoryId])
+
     return (
         <Modal
             visible={isVisible}
             transparent={true}
             animationType="fade"
         >
-            {/* <BlurView
-                style={[tw`w-full h-full`, { backgroundColor: 'rgba(0,0,0,1)' }]}
-                intensity={200}
-            >
-                <TouchableOpacity
-                    style={tw`w-full h-full flex-1`}
-                    onPress={handleVisible}
-                />
-                <Text style={tw`text-white`}>Hello cac ban</Text>
-            </BlurView> */}
             <View style={[tw`flex items-center w-full h-full pt-10`, { backgroundColor: 'rgba(0,0,0,0.8)' }]}>
                 <FlatList
                     data={data}
                     renderItem={({ item }) =>
                         <TouchableOpacity
                             style={tw`py-3 w-full`}
+                            onPress={() => {
+                                setCategoryId(item._id)
+                                handleVisible()
+                            }}
                         >
-                            <Text style={tw`text-gray-400 text-xl font-normal text-center`}>{item}</Text>
-
+                            <Text style={tw`text-gray-400 text-xl font-normal text-center`}>{item.categoryName}</Text>
                         </TouchableOpacity>
                     }
                     vertical

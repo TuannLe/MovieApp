@@ -24,3 +24,28 @@ export const signUp = async (payload) => {
     }
 }
 
+export const favorites = async (payload) => {
+    try {
+        const res = await AXIOS.put(`/${payload.movieId}/favorites-movie`, {
+            headers: {
+                'token': `Bearer ${payload.token}`
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const watching = async (payload) => {
+    try {
+        const res = await AXIOS.put(`/${payload.movieId}/watching-movie`, {
+            headers: {
+                'token': `Bearer ${payload.token}`
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}

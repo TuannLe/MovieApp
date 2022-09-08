@@ -40,6 +40,42 @@ export default function authReducers(state = INIT_STATE.auth, action) {
                 isLoading: false,
                 error: true
             }
+        case TYPES.FAVORITE_MOVIE_START:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case TYPES.FAVORITE_MOVIE_SUCCESS:
+            return {
+                ...state,
+                favorites: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.FAVORITE_MOVIE_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
+        case TYPES.WATCHING_START:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case TYPES.WATCHING_SUCCESS:
+            return {
+                ...state,
+                watching: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.WATCHING_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
         default:
             return state
     }
