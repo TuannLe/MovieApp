@@ -85,3 +85,45 @@ export const WatchingFailure = (error) => {
         error
     }
 }
+
+export const GetMoviesFavoriteStart = (payload) => {
+    return {
+        type: TYPES.GET_MOVIES_FAVORITE_START,
+        payload
+    }
+}
+
+export const GetMoviesFavoriteSuccess = (payload) => {
+    return {
+        type: TYPES.GET_MOVIES_FAVORITE_SUCCESS,
+        payload
+    }
+}
+
+export const GetMoviesFavoriteFailure = (error) => {
+    return {
+        type: TYPES.GET_MOVIES_FAVORITE_FAILURE,
+        error
+    }
+}
+
+export const GetMovieWatchingStart = (payload) => {
+    return {
+        type: TYPES.GET_MOVIES_WATCHING_START,
+        payload
+    }
+}
+
+export const GetMovieWatchingSuccess = (payload) => {
+    return {
+        type: TYPES.GET_MOVIES_WATCHING_SUCCESS,
+        payload
+    }
+}
+
+export const GetMovieWatchingFailure = (error) => {
+    return {
+        type: TYPES.GET_MOVIES_WATCHING_FAILURE,
+        error
+    }
+}

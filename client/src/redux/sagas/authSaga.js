@@ -55,9 +55,37 @@ function* watchingSaga(action) {
     }
 }
 
+function* getMoviesFavoriteSaga(action) {
+    try {
+        console.log('Getting movies favorite running...')
+        const res = yield call(apis.getMoviesFavorite, action.payload)
+        if (res.status === 200) {
+            console.log('Get movies favorite successfully')
+            yield put(actions.GetMoviesFavoriteStart(res.data))
+        }
+    } catch (error) {
+        yield put(actions.GetMoviesFavoriteFailure(error))
+    }
+}
+
+function* getMoviesWatchingSaga(action) {
+    try {
+        console.log('Getting movies watching running...')
+        const res = yield call(apis.getMoviesWatching, action.payload)
+        if (res.status === 200) {
+            console.log('Get movies watching successfully')
+            yield put(actions.GetMovieWatchingSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.GetMovieWatchingFailure(error))
+    }
+}
+
 export default authSaga = [
     takeLatest(TYPES.SIGN_IN_START, fetchLoginSaga),
     takeLatest(TYPES.SIGN_UP_START, signUpSaga),
     takeLatest(TYPES.FAVORITE_MOVIE_START, favoritesSaga),
     takeLatest(TYPES.WATCHING_START, watchingSaga),
+    takeLatest(TYPES.GET_MOVIES_FAVORITE_START, getMoviesFavoriteSaga),
+    takeLatest(TYPES.GET_MOVIES_WATCHING_START, getMoviesWatchingSaga)
 ]

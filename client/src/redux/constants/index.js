@@ -3,6 +3,7 @@ export const INIT_STATE = {
         currentUser: {},
         favorites: [],
         watching: [],
+        message: '',
         isLoading: false,
         message: '',
         error: false

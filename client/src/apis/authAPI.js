@@ -26,7 +26,9 @@ export const signUp = async (payload) => {
 
 export const favorites = async (payload) => {
     try {
-        const res = await AXIOS.put(`/${payload.movieId}/favorites-movie`, {
+        const res = await AXIOS.put(`/user/${payload.movieId}/favorites-movie`, {
+            userId: payload.userId,
+        }, {
             headers: {
                 'token': `Bearer ${payload.token}`
             }
@@ -39,7 +41,33 @@ export const favorites = async (payload) => {
 
 export const watching = async (payload) => {
     try {
-        const res = await AXIOS.put(`/${payload.movieId}/watching-movie`, {
+        const res = await AXIOS.put(`/user/${payload.movieId}/watching-movie`, {
+            headers: {
+                'token': `Bearer ${payload.token}`
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const getMoviesFavorite = async (payload) => {
+    try {
+        const res = await AXIOS.get(`/user/${payload.userId}/get-movie-favorite`, {
+            headers: {
+                'token': `Bearer ${payload.token}`
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const getMoviesWatching = async (payload) => {
+    try {
+        const res = await AXIOS.get(`/user/${payload.userId}/get-movie-watching`, {
             headers: {
                 'token': `Bearer ${payload.token}`
             }

@@ -16,9 +16,10 @@ export default function DetailScreen({ route, navigation }) {
     const [isActiveSimilar, setIsActiveSimilar] = useState(true)
     const [isActiveComments, setIsActiveComments] = useState(false)
     const movieId = route.params.item._id
+    const userId = useSelector((state) => state.auth.currentUser._id)
 
     const handleFavorite = () => {
-        dispatch(FavoriteStart({ token, movieId }))
+        dispatch(FavoriteStart({ token, movieId, userId }))
     }
 
     return (
