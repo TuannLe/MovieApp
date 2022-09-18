@@ -1,26 +1,44 @@
 import { View, Text, SafeAreaView, ImageBackground, Dimensions, FlatList, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
-import { FavoriteStart } from '../redux/actions/auth'
+import { FavoriteStart, WatchingStart } from '../redux/actions/auth'
 import SimilarMovies from '../components/Detail/SimilarMovies'
 import Comments from '../components/Detail/Comments'
 
 export default function DetailScreen({ route, navigation }) {
     const dispatch = useDispatch()
-    const token = useSelector((state) => state.auth.currentUser.accessToken)
+    const currentUser = useSelector((state) => state.auth.currentUser)
+    const categories = useSelector(((state) => state.category.data))
 
     const { width: SCREEN_WIDTH } = Dimensions.get('window')
     const [isActiveSimilar, setIsActiveSimilar] = useState(true)
     const [isActiveComments, setIsActiveComments] = useState(false)
     const movieId = route.params.item._id
-    const userId = useSelector((state) => state.auth.currentUser._id)
+    const [favorite, setFavorite] = useState(false)
+    const [category, setCategory] = useState('')
 
     const handleFavorite = () => {
-        dispatch(FavoriteStart({ token, movieId, userId }))
+        setFavorite(!favorite)
+        dispatch(FavoriteStart({ token: currentUser.accessToken, movieId, userId: currentUser._id }))
     }
+    const handleWatching = () => {
+        dispatch(WatchingStart({ token: currentUser.accessToken, movieId, userId: currentUser._id }))
+    }
+
+    useEffect(() => {
+        setFavorite(currentUser.favorites.includes(movieId))
+    }, [movieId, currentUser.favorites])
+
+    useEffect(() => {
+        categories.map((category) => {
+            if (category._id === route.params.item.categoryId) {
+                setCategory(category.categoryName)
+            }
+        })
+    })
 
     return (
         <ScrollView
@@ -59,24 +77,33 @@ export default function DetailScreen({ route, navigation }) {
                             <Text style={tw`px-2 ml-2 font-medium bg-yellow-400 rounded overflow-hidden`}>HD</Text>
                         </View>
                         <View style={tw`pb-3`}>
-                            <Text style={tw`text-gray-400 text-base`}>{route.params.item.category[0].categoryName}</Text>
+                            {/* <Text style={tw`text-gray-400 text-base`}>{route.params.item.category[0].categoryName}</Text> */}
+                            <Text style={tw`text-gray-400 text-base`}>{category}</Text>
                         </View>
                     </LinearGradient>
                 </ImageBackground>
                 <View style={tw`flex px-2 w-full h-full`}>
                     <TouchableOpacity
-                        onPress={() => setTimeout(() => navigation.navigate('PlayMovieStack'), 500)}
+                        onPress={() => {
+                            handleWatching()
+                            setTimeout(() => navigation.navigate('PlayMovieStack'), 500)
+                        }
+                        }
                         style={tw`flex flex-row items-center justify-center bg-white py-3 mt-3 rounded`}
                     >
                         <Ionicons name="ios-play" size={24} color="black" />
-                        <Text style={tw`text-xl font-medium ml-2`}>Play</Text>
+                        <Text style={tw`text-xl font-medium ml-2`}>Phát</Text>
                     </TouchableOpacity>
                     <View style={tw`flex flex-row justify-around my-5`}>
                         <TouchableOpacity
                             style={tw`p-3 rounded-full bg-gray-800`}
                             onPress={handleFavorite}
                         >
-                            <Feather name="bookmark" size={24} color="white" />
+                            {favorite ? (
+                                <Ionicons name="ios-bookmark" size={24} color="yellow" />
+                            ) : (
+                                <Feather name="bookmark" size={24} color="white" />
+                            )}
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={tw`p-3 rounded-full bg-gray-800`}
@@ -128,7 +155,7 @@ export default function DetailScreen({ route, navigation }) {
                         </View>
                         <View style={tw`mt-3`}>
                             {isActiveSimilar ? (
-                                <SimilarMovies />
+                                <SimilarMovies categoryId={route.params.item.categoryId} />
                             ) : (
                                 isActiveComments ? (
                                     <Comments />

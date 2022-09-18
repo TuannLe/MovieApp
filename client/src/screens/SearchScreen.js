@@ -32,7 +32,7 @@ export default function SearchScreen() {
                 />
             </View>
             <View style={tw`flex-1 w-full h-full`}>
-                {data ? (
+                {data.length ? (
                     <>
                         <Text style={tw`text-gray-300 text-xl font-medium`}>Kết quả tìm kiếm</Text>
                         <FlatList

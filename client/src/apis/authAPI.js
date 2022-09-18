@@ -42,6 +42,8 @@ export const favorites = async (payload) => {
 export const watching = async (payload) => {
     try {
         const res = await AXIOS.put(`/user/${payload.movieId}/watching-movie`, {
+            userId: payload.userId,
+        }, {
             headers: {
                 'token': `Bearer ${payload.token}`
             }

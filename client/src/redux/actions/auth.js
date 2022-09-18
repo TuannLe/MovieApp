@@ -44,6 +44,14 @@ export const SignUpFailure = (error) => {
     }
 }
 
+// Logout
+export const logout = () => {
+    return {
+        type: TYPES.LOGOUT,
+        payload: {}
+    }
+}
+
 export const FavoriteStart = (payload) => {
     return {
         type: TYPES.FAVORITE_MOVIE_START,

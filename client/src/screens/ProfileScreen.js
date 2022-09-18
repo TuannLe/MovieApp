@@ -1,14 +1,25 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native'
-import React, { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import tw from 'twrnc'
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TopNavigatorProfile } from '../navigators/TopNavigator'
+import { GetMoviesFavoriteStart, GetMovieWatchingStart, logout } from '../redux/actions/auth'
 
 export default function ProfileScreen() {
+    const dispatch = useDispatch()
     const refRBSheet = useRef()
     const currentUser = useSelector((state) => state.auth.currentUser)
+
+    useEffect(() => {
+        dispatch(GetMoviesFavoriteStart({ token: currentUser.accessToken, userId: currentUser._id }))
+        dispatch(GetMovieWatchingStart({ token: currentUser.accessToken, userId: currentUser._id }))
+    }, [])
+    const handleLogout = () => {
+        dispatch(logout())
+    }
+
 
     return (
         <SafeAreaView style={tw`w-full h-full bg-black`}>
@@ -48,15 +59,16 @@ export default function ProfileScreen() {
                 <View>
                     <TouchableOpacity
                         style={tw`flex flex-row items-center py-2`}
+                        onPress={handleLogout}
                     >
-                        <Ionicons name="md-lock-closed-outline" style={tw`text-2xl w-10`} />
-                        <Text style={tw`text-base font-medium`}>Privacy</Text>
+                        <Feather name="log-out" style={tw`text-2xl w-10`} />
+                        <Text style={tw`text-base font-medium`}>Log out</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={tw`flex flex-row items-center py-2`}
                     >
-                        <MaterialCommunityIcons name="account-circle-outline" style={tw`text-2xl w-10`} />
-                        <Text style={tw`text-base font-medium`}>Account</Text>
+                        <Ionicons name="md-lock-closed-outline" style={tw`text-2xl w-10`} />
+                        <Text style={tw`text-base font-medium`}>Privacy</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={tw`flex flex-row items-center py-2`}

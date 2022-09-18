@@ -31,9 +31,9 @@ const HomeScreen = () => {
                 </>
             ) : (
                 <>
-                    <Text style={tw`text-xl font-medium text-white px-1.5 mt-3`}>Trending</Text>
+                    <Text style={tw`text-xl font-medium text-white px-1.5 mt-3`}>Thịnh hành</Text>
                     <ListMovie data={dataMovies} />
-                    <Text style={tw`text-xl font-medium text-white px-1.5 mt-3`}>New</Text>
+                    <Text style={tw`text-xl font-medium text-white px-1.5 mt-3`}>Phim mới</Text>
                     <ListMovie data={dataMovies} />
                 </>
             )}

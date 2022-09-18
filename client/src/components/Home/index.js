@@ -32,7 +32,7 @@ export default function index({ item }) {
                     style={tw`absolute flex flex-row items-center top-3 right-3`}
                     onPress={handleVisibleModal}
                 >
-                    <Text style={tw`text-white text-lg mr-2`}>Categories</Text>
+                    <Text style={tw`text-white text-lg mr-2`}>Thể loại</Text>
                     <AntDesign name="caretdown" size={16} color="white" />
                 </TouchableOpacity>
             </LinearGradient>

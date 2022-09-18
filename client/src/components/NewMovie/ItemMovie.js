@@ -33,7 +33,7 @@ export default function ItemMovie({ item }) {
                     })}
                 >
                     <Ionicons name="ios-play" size={24} color="black" />
-                    <Text style={tw`text-xl font-medium ml-2`}>Play</Text>
+                    <Text style={tw`text-xl font-medium ml-2`}>Phát</Text>
                 </TouchableOpacity>
                 <View style={tw`flex flex-row`}>
                     <TouchableOpacity

@@ -9,7 +9,7 @@ export default function RecommendScreen() {
     const data = useSelector((state) => state.movie.movies)
     return (
         <View style={tw`w-full h-full bg-black px-1.5`}>
-            <Text style={tw`text-white text-3xl font-medium mb-2`}>New movie</Text>
+            <Text style={tw`text-white text-3xl font-medium mb-2`}>Phim mới</Text>
             <FlatList
                 data={data}
                 renderItem={({ item }) => <ItemMovie item={item} />}

@@ -8,10 +8,8 @@ export const SIGN_UP_START = "SIGN_UP_START"
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS"
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE"
 
-// Logout
-export const LOGOUT_START = "LOGOUT_START"
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
-export const LOGOUT_FAILURE = "LOGOUT_FAILURE"
+// logout
+export const LOGOUT = "LOGOUT"
 
 // Favorites movie
 export const FAVORITE_MOVIE_START = "FAVORITE_MOVIE_START"

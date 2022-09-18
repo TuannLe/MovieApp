@@ -29,7 +29,6 @@ export const getMoviesByCategory = async (payload) => {
 }
 
 export const searchMovies = async (payload) => {
-    console.log(payload)
     try {
         const res = await AXIOS.post(`${url}/searchMovie`, payload, {
             headers: {

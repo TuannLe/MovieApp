@@ -36,6 +36,7 @@ function* favoritesSaga(action) {
         if (res.status === 200) {
             console.log('Add favorites movie successfully')
             yield put(actions.FavoriteSuccess(res.data))
+            yield put(actions.GetMoviesFavoriteStart({ token: action.payload.token, userId: action.payload.userId }))
         }
     } catch (error) {
         yield put(actions.FavoriteFailure(error))
@@ -48,7 +49,8 @@ function* watchingSaga(action) {
         const res = yield call(apis.watching, action.payload)
         if (res.status === 200) {
             console.log('Add watching movie successfully')
-            yield put(actions.WatchingSuccess(res.data))
+            yield put(actions.WatchingSuccess())
+            yield put(actions.GetMovieWatchingStart({ token: action.payload.token, userId: action.payload.userId }))
         }
     } catch (error) {
         yield put(actions.WatchingFailure(error))
@@ -61,7 +63,7 @@ function* getMoviesFavoriteSaga(action) {
         const res = yield call(apis.getMoviesFavorite, action.payload)
         if (res.status === 200) {
             console.log('Get movies favorite successfully')
-            yield put(actions.GetMoviesFavoriteStart(res.data))
+            yield put(actions.GetMoviesFavoriteSuccess(res.data))
         }
     } catch (error) {
         yield put(actions.GetMoviesFavoriteFailure(error))
